@@ -10,6 +10,27 @@ The dataset is stored in a single HDF5 (`.h5`) or NumPy NPZ (`.npz`) file, with 
 
 ***
 
+## Download
+
+The dataset is permanently archived on Zenodo and can be downloaded freely under the CC BY 4.0 license.
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19244450.svg)](https://doi.org/10.5281/zenodo.19244450)
+
+### Direct download links
+- **HDF5 version**: [Indoor-OTA-12Mod.h5](https://zenodo.org/records/19244451/files/Indoor-OTA-12Mod.h5)
+- **NPZ version**: [Indoor-OTA-12Mod.npz](https://zenodo.org/records/19244451/files/Indoor-OTA-12Mod.npz)
+
+### Command-line download (Linux/macOS/WSL)
+```bash
+# Download HDF5 file
+wget https://zenodo.org/records/19244451/files/Indoor-OTA-12Mod.h5
+
+# Download NPZ file
+wget https://zenodo.org/records/19244451/files/Indoor-OTA-12Mod.npz
+```
+
+***
+
 ## Modulation Types
 
 The dataset includes the following 12 modulation classes:
@@ -51,19 +72,19 @@ The dataset is provided as a single file:
 
 Inside the file, the following datasets/groups are available:
 
-| Key               | Description                                                                               |
-|-------------------|-------------------------------------------------------------------------------------------|
-| `train_data`      | Training samples, shape `(N_train, 256)` – each row is 256 real values (I/Q interleaved). |
-| `train_labels`    | String labels for training samples, shape `(N_train,)`.                                   |
-| `train_snrs`      | SNR values (in dB) for training samples, shape `(N_train,)`.                             |
-| `val_data`        | Validation samples, shape `(N_val, 256)`.                                                 |
-| `val_labels`      | String labels for validation samples, shape `(N_val,)`.                                   |
-| `val_snrs`        | SNR values for validation samples, shape `(N_val,)`.                                      |
-| `test_data`       | Test samples, shape `(N_test, 256)`.                                                      |
-| `test_labels`     | String labels for test samples, shape `(N_test,)`.                                        |
-| `test_snrs`       | SNR values for test samples, shape `(N_test,)`.                                           |
-| `modulation_types`| List of all modulation classes (strings).                                                 |
-| `target_snrs`     | List of SNR levels present in the dataset (integers).                                     |
+| Key                                                                                                           | Description                                           |
+| ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `train_data`      | Training samples, shape `(N_train, 256)` – each row is 256 real values (I/Q interleaved). |                                                       |
+| `train_labels`    | String labels for training samples, shape `(N_train,)`.                                   |                                                       |
+| `train_snrs`      | SNR values (in dB) for training samples, shape `(N_train,)`.                              |                                                       |
+| `val_data`        | Validation samples, shape `(N_val, 256)`.                                                 |                                                       |
+| `val_labels`      | String labels for validation samples, shape `(N_val,)`.                                   |                                                       |
+| `val_snrs`        | SNR values for validation samples, shape `(N_val,)`.                                      |                                                       |
+| `test_data`       | Test samples, shape `(N_test, 256)`.                                                      |                                                       |
+| `test_labels`     | String labels for test samples, shape `(N_test,)`.                                        |                                                       |
+| `test_snrs`       | SNR values for test samples, shape `(N_test,)`.                                           |                                                       |
+| `modulation_types`                                                                                            | List of all modulation classes (strings).             |
+| `target_snrs`                                                                                                 | List of SNR levels present in the dataset (integers). |
 
 **Note**: The raw data is stored as **256 real numbers per sample**, representing 128 complex I/Q samples in interleaved format (I1, Q1, I2, Q2, ...). To use in complex-valued neural networks, reshape to `(N, 2, 128)`.
 
@@ -127,17 +148,29 @@ X_train = data['train_data'].reshape(-1, 2, 128)
 y_train = data['train_labels']```
 ````
 
+## CNN Classification Results
+
+The following figures show the classification performance of a CNN model on the OTA-ModSet dataset.
+
+**Accuracy vs. SNR**
+![CNN Accuracy](images/cnn_accuracy.png)
+
+**Confusion Matrix**
+![CNN Confusion Matrix](images/cnn_confusion.png)
+
 ## Citation
 
 If you use this dataset in your research, please cite:
 
 ```bibtex
 @dataset{Penguin8867_OTA-ModSet_2026,
-  author = {Penguin8867 and NUDT BCNG Team},
+  author = {Qier Qin and NUDT BCNG Team},
   title = {OTA-ModSet: An Over-the-Air Modulation Recognition Dataset},
   year = {2026},
-  publisher = {GitHub},
-  url = {https://github.com/penguin8867/OTA-ModSet}
+  publisher    = {Zenodo},
+  version      = {v1.0},
+  doi          = {10.5281/zenodo.19244450},
+  url          = {https://doi.org/10.5281/zenodo.19244450}
 }
 ```
 
